@@ -1,4 +1,4 @@
-alert("This site requests your location in order to better serve your spatial needs. Your location data will not be shared or stored for any purposes.");
+alert("This site will request your location in order to better serve your spatial needs. Your location information will not be shared or stored for any purposes.");
 
 var light = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -22,10 +22,10 @@ var map = L.map('map', {layers:[light]}).fitWorld();
 
 //locationPopup
 function onLocationFound(e) {
-    var radius = e.accuracy; //this defines a variable radius as the accuracy value returned by the locate method divided by 2. It is divided by 2 because the accuracy value is the sum of the estimated accuracy of the latitude plus the estimated accuracy of the longitude. The unit is meters.
+    var radius = e.accuracy;
 
-    L.marker(e.latlng).addTo(map)  //this adds a marker at the lat and long returned by the locate function.
-        .bindPopup("You are within " + Math.round(radius * 3.28084) + " feet from this point").openPopup(); //this binds a popup to the marker. The text of the popup is defined here as well. Note that we multiply the radius by 3.28084 to convert the radius from meters to feet and that we use Math.round to round the conversion to the nearest whole number.
+    L.marker(e.latlng).addTo(map)  //this adds a marker at the lat and long
+        .bindPopup("You are within " + Math.round(radius * 3.28084) + " feet from this point").openPopup(); //this binds a popup to the marker.
 
         if (radius = 100) {
               L.circle(e.latlng, radius, {color: 'green'}).addTo(map);
@@ -50,7 +50,7 @@ function onLocationFound(e) {
               }
 }
 
-map.on('locationfound', onLocationFound); //this is the event listener
+map.on('locationfound', onLocationFound);
 
 //error message
 function onLocationError(e) {
@@ -59,8 +59,9 @@ function onLocationError(e) {
 map.on('locationerror', onLocationError);
 
 //locator
-map.locate({setView: true, maxZoom: 16});
+map.locate( {setView: true, maxZoom: 16});
 
+//basemap switcher
 var baseMaps = {
     "Light": light,
     "Dark": dark
